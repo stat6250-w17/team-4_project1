@@ -48,7 +48,7 @@ on the variable SEX in the excel file.
 */
 title "Percentage of default clients based on gender";
 proc freq data=UCI_Credit_Card_analytic_file;
-     tables = default.payment.next.month * SEX;
+    tables = default.payment.next.month * SEX;
 run;
 
 /*
@@ -62,7 +62,7 @@ on the variable MARRIAGE in the excel file.
 */
 
 proc freq data=UCI_Credit_Card_analytic_file;
-     tables = default.payment.next.month * MARRIAGE;
+    tables = default.payment.next.month * MARRIAGE;
 run;
 
 /*
@@ -76,7 +76,7 @@ default payment.
 */
 
 proc reg data=UCI_Credit_Card_analytic_file;
-     model default.payment.next.month = AGE SEX MARRIAGE EDUCATION / stb;
+    model default.payment.next.month = AGE SEX MARRIAGE EDUCATION / stb;
 run;
 
 
