@@ -25,3 +25,71 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,
 *Calls the data preparation file in the current working directory.
 Brings in the data preparation file;
 %include '.\STAT6250-01_w17-team-4_project1_data_preparation.sas';
+
+*
+Research Question: What is the average bill amount for the most recent month 
+for customers who have defaulted on payment, for each education level?
+
+Rationale: This gives an idea about the most recent bill amounts for
+defaulters and see if education may play any role.
+
+Methodology: Use PROC MEANS on BILL_AMT6 with a subset of the dataset that 
+has defaulted (default_yn = 1) and by education level.
+;
+proc format;
+    value education_level 1 = 'Graduate School'
+                          2 = 'University'
+                          3 = 'High School'
+                          4 = 'Other'
+                          5-6 = 'Unknown';
+run;
+
+title 'Average bill statement amounts by education level for those who have 
+defaulted';
+proc means data=UCI_Credit_Card_analytic_file;
+    class education;
+    var BILL_AMT6;
+    where default_yn = 1;
+    format education education_level. bill_amt6 dollar9.2;
+run;
+title;
+
+*Research Question: Which education group has the highest probability of
+defaulting?
+
+Rationale: This can help identify which education level to watch out for
+when lending credit.
+
+Methodology: Use PROC FREQ on education with a subset of the dataset that
+has defaulted (default_yn = 1). By finding the row percentages, we get
+the distribution which can help tell us which educational level makes up
+the highest percentage of defaulters.
+;
+
+title 'Distribution of education level among those who have defaulted';
+proc freq data=UCI_Credit_Card_analytic_file;
+    table education;
+    where default_yn = 1;
+run;
+title;
+
+*Research Question: What is the average bill statement across all
+available months months between defaulters and non-defaulters, for
+levels of education, sex, and marital status?
+
+Rationale: This would give us an idea of to see if between defaulters
+and non-defaulter of each level of said categorical variables have
+different spending habits
+;
+
+/*Prepares a dataset containing the mean of all bill statements 
+amounts*/
+data UCI_CC_analytic_file_meanbill;
+    set UCI_Credit_Card_analytic_file;
+    meanbill = mean(bill_amt1-bill_amt6);
+run;
+
+title 'Average billstatement amounts between defaults and 
+non-defaulters of each level of education';
+proc means data=UCI_CC_analytic_file;
+    class education;
