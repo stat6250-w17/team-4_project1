@@ -34,7 +34,7 @@ Rationale: This gives an idea about the most recent bill amounts for
 defaulters and see if education may play any role.
 
 Methodology: Use PROC MEANS on BILL_AMT6 with a subset of the dataset that 
-has defaulted (default_yn = 1) and by education level.
+has defaulted (default.payment.next.month = 1) and by education level.
 ;
 proc format;
     value education_level 1 = 'Graduate School'
@@ -49,8 +49,8 @@ defaulted';
 proc means data=UCI_Credit_Card_analytic_file;
     class education;
     var BILL_AMT6;
-    where default_yn = 1;
-    format education education_level. bill_amt6 dollar9.2;
+    where default.payment.next.month = 1;
+    format education education_level.;
 run;
 title;
 
@@ -61,15 +61,16 @@ Rationale: This can help identify which education level to watch out for
 when lending credit.
 
 Methodology: Use PROC FREQ on education with a subset of the dataset that
-has defaulted (default_yn = 1). By finding the row percentages, we get
-the distribution which can help tell us which educational level makes up
-the highest percentage of defaulters.
+has defaulted (default.payment.next.month = 1). 
+By finding the row percentages, we get the distribution which can help 
+tell us which educational level makes up the highest percentage of 
+defaulters.
 ;
 
 title 'Distribution of education level among those who have defaulted';
 proc freq data=UCI_Credit_Card_analytic_file;
     table education;
-    where default_yn = 1;
+    where default.payment.next.month = 1;
 run;
 title;
 
@@ -89,7 +90,20 @@ data UCI_CC_analytic_file_meanbill;
     meanbill = mean(bill_amt1-bill_amt6);
 run;
 
-title 'Average billstatement amounts between defaults and 
-non-defaulters of each level of education';
-proc means data=UCI_CC_analytic_file;
-    class education;
+title 'Average billstatement amounts for defaulters 
+of each level of education, marital status, and sex';
+proc means data=UCI_CC_analytic_file_meanbill;
+    class education marriage sex;
+	var meanbill;
+	where default.payment.next.month = 1;
+run;
+title;
+
+title 'Average billstatement amounts for non-defaulters 
+of each level of education, marital status, and sex';
+proc means data=UCI_CC_analytic_file_meanbill;
+    class education marriage sex;
+	var meanbill;
+	where default.payment.next.month = 0;
+run;
+title;
