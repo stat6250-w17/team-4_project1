@@ -1,4 +1,4 @@
-﻿*******************************************************************************;
+*******************************************************************************;
 **************** 80-character banner for column width reference ***************;
 * (set window width to banner width to calibrate line length to 80 characters *;
 *******************************************************************************;
@@ -43,3 +43,15 @@ proc import file= credit
 			dbms=csv replace;
 run;
 filename credit clear;
+
+*Check to see if there's any duplicate keys;
+proc sort nodupkey data=credit_raw dupout = credit_raw_dup out = _null_;
+    by id;
+run;
+
+*Create an anlytic dataset based off of only the columns that need to be used for
+addressing the proposed research questions corresponding to data analysis files;
+data credit_final;
+    set credit_raw;
+    keep id age limit_bal sex marriage education 'default.payment.next.month'n;
+run;
