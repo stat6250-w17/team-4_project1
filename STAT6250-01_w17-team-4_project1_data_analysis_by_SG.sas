@@ -94,8 +94,8 @@ title 'Average billstatement amounts for defaulters
 of each level of education, marital status, and sex';
 proc means data=UCI_CC_analytic_file_meanbill;
     class education marriage sex;
-	var meanbill;
-	where default.payment.next.month = 1;
+    var meanbill;
+    where default.payment.next.month = 1;
 run;
 title;
 
@@ -103,7 +103,7 @@ title 'Average billstatement amounts for non-defaulters
 of each level of education, marital status, and sex';
 proc means data=UCI_CC_analytic_file_meanbill;
     class education marriage sex;
-	var meanbill;
-	where default.payment.next.month = 0;
+    var meanbill;
+    where default.payment.next.month = 0;
 run;
 title;
