@@ -36,6 +36,7 @@ defaulters and see if education may play any role.
 Methodology: Use PROC MEANS on BILL_AMT6 with a subset of the dataset that 
 has defaulted (default.payment.next.month = 1) and by education level.
 ;
+
 proc format;
     value education_level 1 = 'Graduate School'
                           2 = 'University'
