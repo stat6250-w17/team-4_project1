@@ -7,7 +7,7 @@
 * 
 This file prepares the dataset described below for analysis.
 
-Dataset Name: Student Poverty Free or Reduced Price Meals (FRPM) Data
+Dataset Name: Default of Credit Card Clients Dataset
 
 Experimental Units: Default of Credit Card Clients
 
@@ -33,7 +33,6 @@ https://raw.githubusercontent.com/sgummidipundi-stat6250/Project-1/master/UCI_Cr
 ;
 
 
-
 * load raw default credit card dataset over the wire;
 filename UCICCtmp TEMP;
 proc http
@@ -51,32 +50,26 @@ run;
 filename UCICCtmp clear;
 
 * check raw Credit card dataset for duplicates with respect to its composite key;
-proc sort nodupkey data= UCI_Credit_Card_raw dupout= UCI_Credit_Card_raw_dups out=_null_;
+proc sort nodupkey data= UCI_Credit_Card_raw dupout= UCI_Credit_Card_raw_dups 
+out=_null_;
     by id;
 run;
 
 
-* build analytic dataset from default credit card dataset with the least number of columns and
-minimal cleaning/transformation needed to address research questions in
-corresponding data-analysis files;
+* build analytic dataset from default credit card dataset with the least 
+number of columns and minimal cleaning/transformation needed to address 
+research questions in corresponding data-analysis files;
 data UCI_Credit_Card_analytic_file;
-
-/*default.payment.next.month has been renamed in order to comply with SAS
-      naming conventions*/
-    
-    set UCI_Credit_Card_raw (rename=(default_payment_next_month = default_yn));
-
-    retain
+	retain
         id
         age
         limit_bal
         sex
         marriage
         education
-        default_yn
-
-        
+        default_yn    
     ;
+
     keep
         id
         age
