@@ -32,26 +32,31 @@ https://raw.githubusercontent.com/sgummidipundi-stat6250/Project-1/master/UCI_Cr
 ;
 
 *Load raw data over the wire;
-filename credit temp;
+filename UCICCtmp temp;
 proc http method="get"
 		url="&inputDatasetURL."
-		out=credit;
+		out=UCICCtmp;
 run;
 
-proc import file= credit
-			out= Credit_raw
+proc import file= UCICCtmp
+			out= UCI_Credit_Card_raw
 			dbms=csv replace;
 run;
 filename credit clear;
 
 *Check to see if there's any duplicate keys;
-proc sort nodupkey data=credit_raw dupout = credit_raw_dup out = _null_;
+proc sort nodupkey data=UCI_Credit_Card_raw 
+dupout = UCI_Credit_Card_raw_dups out = _null_;
     by id;
 run;
 
-*Create an anlytic dataset based off of only the columns that need to be used for
-addressing the proposed research questions corresponding to data analysis files;
-data credit_final;
-    set credit_raw;
-    keep id age limit_bal sex marriage education 'default.payment.next.month'n;
+*Create an anlytic dataset based off of only the columns that need to be used 
+for addressing the proposed research questions corresponding to data analysis 
+files;
+data UCI_Credit_Card_analytic_file;
+    /*default.payment.next.month has been renamed in order to comply with SAS
+      naming conventions*/
+    set UCI_Credit_Card_raw (rename=('default.payment.next.month'n = default_yn));
+	retain id age limit_bal sex marriage education default_yn;
+    keep id age limit_bal sex marriage education default_yn;
 run;
