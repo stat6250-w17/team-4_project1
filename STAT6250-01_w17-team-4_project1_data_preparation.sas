@@ -16,12 +16,12 @@ Number of Observations: 30000
 Number of Features: 25
 
 Data Source: The file, UCI_Credit_Card.xlsx was downloaded from
-“https://www.kaggle.com/uciml/defaultt-of-credit-card-clients-dataset”
+'https://www.kaggle.com/uciml/default-of-credit-card-clients-dataset�'
 The CSV file was downloaded from the files directory on the bottom of the page.
 No further modifications took place and the data was used directly.
 
 Data Dictionary: The data dictionary was taken from
-“https://www.kaggle.com/uciml/default-of-credit-card-clients-dataset”. The 
+'https://www.kaggle.com/uciml/default-of-credit-card-clients-dataset'. The 
 CSV file was downloaded from the files directory on the bottom of the page.
 
 Unique ID: The column ID is the unique ID.
@@ -64,7 +64,7 @@ data UCI_Credit_Card_analytic_file;
 /*default.payment.next.month has been renamed in order to comply with SAS
       naming conventions*/
     
-    set UCI_Credit_Card_raw (rename=('default.payment.next.month'n = default_yn));
+    set UCI_Credit_Card_raw (rename=(default_payment_next_month = default_yn));
 
     retain
         id
