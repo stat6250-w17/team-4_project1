@@ -67,7 +67,7 @@ data UCI_Credit_Card_analytic_file;
         sex
         marriage
         education
-        default_yn    
+        default.payment.next.month    
     ;
 
     keep
@@ -77,7 +77,7 @@ data UCI_Credit_Card_analytic_file;
         sex
         marriage
         education
-        default_yn
+        default.payment.next.month
     ;
     set UCI_Credit_Card_raw;
 run;
