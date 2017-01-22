@@ -55,7 +55,7 @@ proc means data=UCI_Credit_Card_analytic_file;
 run;
 title;
 
-*Research Question: Which education group has the highest probability of
+*Research Question: Which education group comprises the most of those who are
 defaulting?
 
 Rationale: This can help identify which education level to watch out for
