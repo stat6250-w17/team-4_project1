@@ -82,6 +82,10 @@ levels of education, sex, and marital status?
 Rationale: This would give us an idea of to see if between defaulters
 and non-defaulter of each level of said categorical variables have
 different spending habits
+
+Methodology: Create an average bill amount across each of the months
+for each variable. Take the average of the newly created variable for
+both defaulters and non-defaulters.
 ;
 
 /*Prepares a dataset containing the mean of all bill statements 
