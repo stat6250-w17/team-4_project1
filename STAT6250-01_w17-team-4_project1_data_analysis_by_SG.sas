@@ -26,89 +26,83 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,
 Brings in the data preparation file;
 %include '.\STAT6250-01_w17-team-4_project1_data_preparation.sas';
 
-*
-Research Question: What is the average bill amount for the most recent month 
-for customers who have defaulted on payment, for each education level?
+*Research Questions;
 
-Rationale: This gives an idea about the most recent bill amounts for
-defaulters and see if education may play any role.
+/*Research Question 1*/
+title1 'Research Question: What is the average bill amount for the most recent month 
+for customers who have defaulted on payment, for each education level?';
+title2 'Rationale: This gives an idea about the most recent bill amounts for
+defaulters and see if education may play any role.';
 
-Methodology: Use PROC MEANS on BILL_AMT6 with a subset of the dataset that 
-has defaulted (default.payment.next.month = 1) and by education level.
-;
-
-proc format;
-    value education_level 1 = 'Graduate School'
-                          2 = 'University'
-                          3 = 'High School'
-                          4 = 'Other'
-                          5-6 = 'Unknown';
-run;
-
-title 'Average bill statement amounts by education level for those who have 
-defaulted';
 proc means data=UCI_Credit_Card_analytic_file;
     class education;
     var BILL_AMT6;
-    where default.payment.next.month = 1;
+    where default_payment_next_month = 1;
     format education education_level.;
 run;
+*Methodology: Use PROC MEANS on BILL_AMT6 with a subset of the dataset that 
+has defaulted (default.payment.next.month = 1) and by education level.
+;
+footnote1 'By find the average of the most recent bill statement across 
+different education distributions, susbet for defaulters, we can see if
+statement amounts differ';
 title;
+footnote;
 
-*Research Question: Which education group comprises the most of those who are
-defaulting?
 
-Rationale: This can help identify which education level to watch out for
-when lending credit.
-
-Methodology: Use PROC FREQ on education with a subset of the dataset that
+/*Research Question 2*/
+title1 'Research Question: Which education group comprises the most of those who are
+defaulting?';
+title2 'Rationale: This can help identify which education level to watch out for
+when lending credit.';
+proc freq data=UCI_Credit_Card_analytic_file;
+    table education;
+    where default_payment_next_month = 1;
+run;
+*Methodology: Use PROC FREQ on education with a subset of the dataset that
 has defaulted (default.payment.next.month = 1). 
 By finding the row percentages, we get the distribution which can help 
 tell us which educational level makes up the highest percentage of 
 defaulters.
 ;
-
-title 'Distribution of education level among those who have defaulted';
-proc freq data=UCI_Credit_Card_analytic_file;
-    table education;
-    where default.payment.next.month = 1;
-run;
+footnote1 'PROC FREQ is taken with a subet of the dataset that has defaulted
+(default_payment_next_month = 1) and education is taken as the variable of
+interest. We can surmise that the education with the highest percentage takes
+up the percentage of defaulters';
 title;
+footnote;
 
-*Research Question: What is the average bill statement across all
+
+/*Research Question 3*/
+title1 'Research Question: What is the average bill statement across all
 available months months between defaulters and non-defaulters, for
-levels of education, sex, and marital status?
-
-Rationale: This would give us an idea of to see if between defaulters
+levels of education, sex, and marital status?';
+title2 'Rationale: This would give us an idea of to see if between defaulters
 and non-defaulter of each level of said categorical variables have
-different spending habits
-
+different spending habits';
+title3 'Average billstatement amounts for defaulters of each level of 
+education, marital status, and sex';
+proc means data=UCI_CC_analytic_file_meanbill;
+    class education marriage sex;
+    var meanbill;
+    where default_payment_next_month = 1;
+run;
+title4 'Average billstatement amounts for non-defaulters of each level of 
+education, marital status, and sex';
+proc means data=UCI_CC_analytic_file_meanbill;
+    class education marriage sex;
+    var meanbill;
+    where default_payment_next_month = 0;
+run;
+*
 Methodology: Create an average bill amount across each of the months
 for each variable. Take the average of the newly created variable for
 both defaulters and non-defaulters.
 ;
-
-/*Prepares a dataset containing the mean of all bill statements 
-amounts*/
-data UCI_CC_analytic_file_meanbill;
-    set UCI_Credit_Card_analytic_file;
-    meanbill = mean(bill_amt1-bill_amt6);
-run;
-
-title 'Average billstatement amounts for defaulters 
-of each level of education, marital status, and sex';
-proc means data=UCI_CC_analytic_file_meanbill;
-    class education marriage sex;
-    var meanbill;
-    where default.payment.next.month = 1;
-run;
+footnote1 'By taking the deriviative dataset which has a variable for meanbill
+amount, we isolate each PROC MEANS statement for defaulters and non-defaulters.
+We look at class variables education, marriage, and sex. From here, we can see
+if there are statement differences between different levels of each variable for
+defaulters and non-defaulters';
 title;
-
-title 'Average billstatement amounts for non-defaulters 
-of each level of education, marital status, and sex';
-proc means data=UCI_CC_analytic_file_meanbill;
-    class education marriage sex;
-    var meanbill;
-    where default.payment.next.month = 0;
-run;
-title;
+footnote;
