@@ -32,6 +32,14 @@ Unique ID: The column ID is the unique ID.
 https://raw.githubusercontent.com/sgummidipundi-stat6250/Project-1/master/UCI_Credit_Card.csv
 ;
 
+*PROC FORMAT steps;
+proc format;
+    value education_level 1 = 'Graduate School'
+                          2 = 'University'
+                          3 = 'High School'
+                          4 = 'Other'
+                          5-6 = 'Unknown';
+run;
 
 * load raw default credit card dataset over the wire;
 filename UCICCtmp TEMP;
@@ -67,7 +75,7 @@ data UCI_Credit_Card_analytic_file;
         sex
         marriage
         education
-        default.payment.next.month    
+        default_payment_next_month    
     ;
 
     keep
@@ -77,11 +85,16 @@ data UCI_Credit_Card_analytic_file;
         sex
         marriage
         education
-        default.payment.next.month
+        default_payment_next_month
     ;
     set UCI_Credit_Card_raw;
 run;
 
+*Data steps to build for analysis;
 
-
-
+/*Prepares a dataset containing the mean of all bill statements 
+amounts*/
+data UCI_CC_analytic_file_meanbill;
+    set UCI_Credit_Card_analytic_file;
+    meanbill = mean(bill_amt1-bill_amt6);
+run;
