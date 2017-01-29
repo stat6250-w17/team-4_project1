@@ -91,7 +91,9 @@ run;
 
 * build analytic dataset from default credit card dataset with the least 
 number of columns and minimal cleaning/transformation needed to address 
-research questions in corresponding data-analysis files;
+research questions in corresponding data-analysis files. Named improper
+excel variable name default.payment.next.month to SAS compliant
+default_payment_next_month;
 data UCI_Credit_Card_analytic_file;
 	retain
         id
@@ -114,7 +116,7 @@ data UCI_Credit_Card_analytic_file;
         default_payment_next_month
         bill_amt1-bill_amt6
     ;
-    set UCI_Credit_Card_raw;
+    set UCI_Credit_Card_raw (rename=('default.payment.next.month'n = default_payment_next_month));
 run;
 
 *Data steps to build for analysis;
