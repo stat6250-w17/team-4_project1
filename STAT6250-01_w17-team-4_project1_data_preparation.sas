@@ -39,6 +39,23 @@ proc format;
                           3 = 'High School'
                           4 = 'Other'
                           5-6 = 'Unknown';
+
+
+
+    value default_payment_next_month_bins
+        0="Good Standing"
+        1="Default"
+        
+    ;
+    value gender_bins
+       1="Male"
+       2="Female"
+    ;
+    value marital_status_bins
+	    1="Married"
+	    2="Single"
+	    3="Others"
+   ;
 run;
 
 * load raw default credit card dataset over the wire;
