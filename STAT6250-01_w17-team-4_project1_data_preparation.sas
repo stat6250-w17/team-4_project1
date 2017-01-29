@@ -56,6 +56,14 @@ proc format;
 	    2="Single"
 	    3="Others"
    ;
+   value agefmt
+        low-25="<25"
+        25-35="25-35"
+        35-45="35-45"
+        45-55="45-55"
+        55-65="55-65"
+        65-high=">=65" 
+    ;
 run;
 
 * load raw default credit card dataset over the wire;
