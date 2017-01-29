@@ -67,6 +67,7 @@ defaulters.;
 proc freq data=UCI_Credit_Card_analytic_file;
     table education;
     where default_payment_next_month = 1;
+    format education education_level.
 run;
 
 
@@ -79,9 +80,6 @@ and non-defaulter of each level of said categorical variables have
 different spending habits';
 title3 'Average billstatement amounts for defaulters of each level of 
 education, marital status, and sex';
-*Methodology: Create an average bill amount across each of the months
-for each variable. Take the average of the newly created variable for
-both defaulters and non-defaulters.;
 footnote1 'By taking the deriviative dataset which has a variable for meanbill
 amount, we isolate each PROC MEANS statement for defaulters and non-defaulters.
 We look at class variables education, marriage, and sex. From here, we can see
@@ -89,10 +87,14 @@ if there are statement differences between different levels of each variable for
 defaulters and non-defaulters';
 title;
 footnote;
+*Methodology: Create an average bill amount across each of the months
+for each variable. Take the average of the newly created variable for
+both defaulters and non-defaulters.;
 proc means data=UCI_CC_analytic_file_meanbill;
     class education marriage sex;
     var meanbill;
     where default_payment_next_month = 1;
+    format education education_level. marriage marital_status_bins. sex gender_bins.;
 run;
 title4 'Average billstatement amounts for non-defaulters of each level of 
 education, marital status, and sex';
@@ -100,4 +102,5 @@ proc means data=UCI_CC_analytic_file_meanbill;
     class education marriage sex;
     var meanbill;
     where default_payment_next_month = 0;
+    format education education_level. marriage marital_status_bins. sex gender_bins.;
 run;
