@@ -33,21 +33,19 @@ title1 'Research Question: What is the average bill amount for the most recent m
 for customers who have defaulted on payment, for each education level?';
 title2 'Rationale: This gives an idea about the most recent bill amounts for
 defaulters and see if education may play any role.';
-
+footnote1 'By find the average of the most recent bill statement across 
+different education distributions, susbet for defaulters, we can see if
+statement amounts differ';
+title;
+footnote;
+*Methodology: Use PROC MEANS on BILL_AMT6 with a subset of the dataset that 
+has defaulted (default.payment.next.month = 1) and by education level.;
 proc means data=UCI_Credit_Card_analytic_file;
     class education;
     var BILL_AMT6;
     where default_payment_next_month = 1;
     format education education_level.;
 run;
-*Methodology: Use PROC MEANS on BILL_AMT6 with a subset of the dataset that 
-has defaulted (default.payment.next.month = 1) and by education level.
-;
-footnote1 'By find the average of the most recent bill statement across 
-different education distributions, susbet for defaulters, we can see if
-statement amounts differ';
-title;
-footnote;
 
 
 /*Research Question 2*/
@@ -55,22 +53,21 @@ title1 'Research Question: Which education group comprises the most of those who
 defaulting?';
 title2 'Rationale: This can help identify which education level to watch out for
 when lending credit.';
-proc freq data=UCI_Credit_Card_analytic_file;
-    table education;
-    where default_payment_next_month = 1;
-run;
-*Methodology: Use PROC FREQ on education with a subset of the dataset that
-has defaulted (default.payment.next.month = 1). 
-By finding the row percentages, we get the distribution which can help 
-tell us which educational level makes up the highest percentage of 
-defaulters.
-;
 footnote1 'PROC FREQ is taken with a subet of the dataset that has defaulted
 (default_payment_next_month = 1) and education is taken as the variable of
 interest. We can surmise that the education with the highest percentage takes
 up the percentage of defaulters';
 title;
 footnote;
+*Methodology: Use PROC FREQ on education with a subset of the dataset that
+has defaulted (default.payment.next.month = 1). 
+By finding the row percentages, we get the distribution which can help 
+tell us which educational level makes up the highest percentage of 
+defaulters.;
+proc freq data=UCI_Credit_Card_analytic_file;
+    table education;
+    where default_payment_next_month = 1;
+run;
 
 
 /*Research Question 3*/
@@ -82,6 +79,16 @@ and non-defaulter of each level of said categorical variables have
 different spending habits';
 title3 'Average billstatement amounts for defaulters of each level of 
 education, marital status, and sex';
+*Methodology: Create an average bill amount across each of the months
+for each variable. Take the average of the newly created variable for
+both defaulters and non-defaulters.;
+footnote1 'By taking the deriviative dataset which has a variable for meanbill
+amount, we isolate each PROC MEANS statement for defaulters and non-defaulters.
+We look at class variables education, marriage, and sex. From here, we can see
+if there are statement differences between different levels of each variable for
+defaulters and non-defaulters';
+title;
+footnote;
 proc means data=UCI_CC_analytic_file_meanbill;
     class education marriage sex;
     var meanbill;
@@ -94,15 +101,3 @@ proc means data=UCI_CC_analytic_file_meanbill;
     var meanbill;
     where default_payment_next_month = 0;
 run;
-*
-Methodology: Create an average bill amount across each of the months
-for each variable. Take the average of the newly created variable for
-both defaulters and non-defaulters.
-;
-footnote1 'By taking the deriviative dataset which has a variable for meanbill
-amount, we isolate each PROC MEANS statement for defaulters and non-defaulters.
-We look at class variables education, marriage, and sex. From here, we can see
-if there are statement differences between different levels of each variable for
-defaulters and non-defaulters';
-title;
-footnote;
