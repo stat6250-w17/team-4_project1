@@ -56,8 +56,10 @@ Methodology: Use PROC FREQ to compute the percentage of clients defaulting based
 on the variable SEX in the excel file. 
 ;
 proc freq data=UCI_Credit_Card_analytic_file;
-    table default_payment_next_month * sex
-	/ missing norow nocol nofreq
+    table 
+         default_payment_next_month 
+        *sex
+	    / missing norow nocol nofreq
     ;
     format
         default_payment_next_month default_payment_next_month_bins.
@@ -86,9 +88,11 @@ Methodology: Use PROC freq to compute the percentage of clients defaulting based
 on the variable MARRIAGE in the excel file. 
 ;
 proc freq data=UCI_Credit_Card_analytic_file;
-    table default_payment_next_month * Marriage
-	/ missing norow nocol nopercent ;
-	where marriage > 0
+    table
+         default_payment_next_month
+        *Marriage
+	    / missing norow nocol nopercent ;
+	    where marriage > 0
     ;
 	format
         default_payment_next_month default_payment_next_month_bins.
