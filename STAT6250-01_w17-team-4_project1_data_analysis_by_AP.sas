@@ -70,6 +70,8 @@ proc freq data=UCI_Credit_Card_analytic_file;
         sex gender_bins.
     ;
 run;
+title;
+footnote;
 
 title1 
 "Research Question: Are people who are single more likely to default than couples?"
@@ -107,7 +109,8 @@ proc freq data=UCI_Credit_Card_analytic_file;
 	;
 run;
 
-
+title;
+footnote;
 /* Notes: These percentages may not seem significantly different, but a regression
 may yeild a result which might indicate other parameter which may impact defaulting*/
 
@@ -136,6 +139,7 @@ proc reg data=UCI_Credit_Card_analytic_file;
 	
 run;
 
-
+title;
+footnote;
 
 
