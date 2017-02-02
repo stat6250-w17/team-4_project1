@@ -34,36 +34,34 @@ https://raw.githubusercontent.com/sgummidipundi-stat6250/Project-1/master/UCI_Cr
 
 *PROC FORMAT steps;
 proc format;
-    value education_level 1 = 'Graduate School'
-                          2 = 'University'
-                          3 = 'High School'
-                          4 = 'Other'
-                          5-6 = 'Unknown';
-
-
-
+    value education_level 
+        1 = 'Graduate School'
+        2 = 'University'
+        3 = 'High School'
+        4 = 'Other'
+        5-6 = 'Unknown'
+    ;
     value default_payment_next_month_bins
         0="Good Standing"
-        1="Default"
-        
+        1="Default"   
     ;
     value gender_bins
-       1="Male"
-       2="Female"
+        1="Male"
+        2="Female"
     ;
     value marital_status_bins
 	    1="Married"
 	    2="Single"
 	    3="Others"
    ;
-   value agefmt
-        low-25="<25"
-        25-35="25-35"
-        35-45="35-45"
-        45-55="45-55"
-        55-65="55-65"
-        65-high=">=65" 
-    ;
+   value age_bins
+       low-25="<25"
+       25-35="25-35"
+       35-45="35-45"
+       45-55="45-55"
+       55-65="55-65"
+       65-high=">=65" 
+   ;
 run;
 
 * load raw default credit card dataset over the wire;
@@ -83,8 +81,10 @@ run;
 filename UCICCtmp clear;
 
 * check raw Credit card dataset for duplicates with respect to its composite key;
-proc sort nodupkey data= UCI_Credit_Card_raw dupout= UCI_Credit_Card_raw_dups 
-out=_null_;
+proc sort 
+        nodupkey 
+        data= UCI_Credit_Card_raw dupout= UCI_Credit_Card_raw_dups 
+        out=_null_;
     by id;
 run;
 

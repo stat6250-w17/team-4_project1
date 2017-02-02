@@ -53,7 +53,7 @@ Methodology: Use PROC freq to compute the percentage of default clients.
 ;
 proc freq  data=UCI_Credit_Card_analytic_file;
     tables default_payment_next_month
-         /nocum
+        /nocum
     ;
     format default_payment_next_month default_payment_next_month_bins.; 
 run;
@@ -83,7 +83,7 @@ proc freq data=UCI_Credit_Card_analytic_file;
         / missing nofreq nopercent norow 
     ;
     format 
-        age agefmt. 
+        age age_bins. 
         default_payment_next_month default_payment_next_month_bins.
     ; 
 run;
