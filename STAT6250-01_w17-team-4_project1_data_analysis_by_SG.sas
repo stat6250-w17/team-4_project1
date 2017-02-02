@@ -79,7 +79,7 @@ title1 'Research Question: What is the average bill statement across all
 available months months between defaulters and non-defaulters, for
 levels of education, sex, and marital status?';
 title2 'Rationale: This would give us an idea of to see if between defaulters
-and non-defaulter of each level of said categorical variables have
+and non-defaulter of each level of said categorical variables have 
 different spending habits';
 footnote1 'Considering only values with valid data and N > 100:';
 footnote2 'Unusually, between all levels of education, marriage, and sex,
@@ -93,30 +93,31 @@ had a higher mean bill statement amount';
 for each variable. Take the average of the newly created variable for
 both defaulters and non-defaulters.;
 title3 'Average bill statement amounts for defaulters of each level of 
-education';
+ education';
 proc means data=UCI_CC_analytic_file_meanbill;
     class default_payment_next_month education;
     var meanbill;
     format default_payment_next_month default_payment_next_month_bins. 
 education education_level.;
 run;
+title3;
 title4 'Average bill statement amounts for defaulters of each level of 
-marriage';
+ marriage';
 proc means data=UCI_CC_analytic_file_meanbill;
     class default_payment_next_month marriage;
     var meanbill;
     format default_payment_next_month default_payment_next_month_bins. 
 marriage marital_status_bins.;
 run;
-
-title4 'Average bill statement amounts for defaulters of each level of 
-gender';
+title4;
+title5 'Average bill statement amounts for defaulters of each level of 
+ gender';
 proc means data=UCI_CC_analytic_file_meanbill;
     class default_payment_next_month sex;
     var meanbill;
     format default_payment_next_month default_payment_next_month_bins. 
 sex gender_bins.;
 run;
-title1;
-title2;
+title5;
+title;
 footnote;
