@@ -16,9 +16,11 @@ See included file for dataset properties
 %let dataPrepFileName = STAT6250-01_w17-team-4_project1_data_preparation.sas;
 %let sasUEFilePrefix = team-4_project1;
 
-* load external file that generates analytic dataset UCI_Credit_Card_analytic_file
-using a system path dependent on the host operating system, after setting the
-relative file import path to the current directory, if using Windows;
+* load external file that generates analytic dataset
+UCI_Credit_Card_analytic_file using a system path dependent on the host
+operating system, after setting the relative file import path to the current 
+directory, if using Windows.
+;
 
 %macro setup;
 %if
@@ -117,8 +119,7 @@ proc means
     ;
     class default_payment_next_month;
     var limit_bal;
-    format
-        default_payment_next_month default_payment_next_month_bins.; 
+    format default_payment_next_month default_payment_next_month_bins.; 
 run;
 title;
 footnote;
