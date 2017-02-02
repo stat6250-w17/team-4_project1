@@ -55,7 +55,7 @@ proc freq  data=UCI_Credit_Card_analytic_file;
     tables default_payment_next_month
          /nocum
     ;
-	format default_payment_next_month default_payment_next_month_bins.; 
+    format default_payment_next_month default_payment_next_month_bins.; 
 run;
 title;
 footnote;
@@ -82,8 +82,9 @@ proc freq data=UCI_Credit_Card_analytic_file;
     tables default_payment_next_month*age
         / missing nofreq nopercent norow 
     ;
-    format age agefmt. 
-           default_payment_next_month default_payment_next_month_bins.
+    format 
+        age agefmt. 
+        default_payment_next_month default_payment_next_month_bins.
     ; 
 run;
 title;
@@ -110,10 +111,14 @@ footnote3
 Methodolody: Compute five-number summaries by default.payment.next.month 
 indicator variable
 ;
-proc means min q1 median q3 max data=UCI_Credit_Card_analytic_file;
+proc means 
+        min q1 median q3 max 
+        data=UCI_Credit_Card_analytic_file
+    ;
     class default_payment_next_month;
     var limit_bal;
-	format default_payment_next_month default_payment_next_month_bins.; 
+    format
+        default_payment_next_month default_payment_next_month_bins.; 
 run;
 title;
 footnote;
