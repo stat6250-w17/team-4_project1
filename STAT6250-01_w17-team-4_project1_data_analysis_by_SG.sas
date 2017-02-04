@@ -33,9 +33,9 @@ title1 'Research Question: What is the average bill amount for the most recent
 month for customers who have defaulted on payment, for each education level?';
 title2 'Rationale: This gives an idea about the most recent bill amounts for
 defaulters and see if education may play any role.';
-footnote1 'By find the average of the most recent bill statement across 
-different education distributions, susbet for defaulters, we can see if
-statement amounts differ';
+footnote1 'By finding the average of the most recent bill statement across 
+different education distributions and subsetting for defaulters, we can see if
+statement amounts differ among education levels';
 footnote2 'Besides those in the "Other" and "Unknown" levels, University 
 graduates had the highest statement bill amounts';
 *Methodology: Use PROC MEANS on BILL_AMT6 with a subset of the dataset that 
