@@ -118,6 +118,9 @@ title2
 footnote1
 "Based on the output, this model explains less than 3% about the default payment"
 ;
+footnote2
+"Since the model does not explain the behavior of the client defaulting based on these parameters, future analysis can include age category and also excluding unknown and missing data"
+;
 *
 Methodology: We have to use regression to find which parameter affects the 
 default payment.
@@ -126,5 +129,6 @@ proc reg data=UCI_Credit_Card_analytic_file;
     model default_payment_next_month = SEX MARRIAGE EDUCATION
     ;	
 run;
+quit;
 title;
 footnote;
