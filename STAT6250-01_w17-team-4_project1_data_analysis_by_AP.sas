@@ -49,7 +49,7 @@ footnote1
 "Based on the above output, it cannot be concluded if gender plays a role or not."
 ;
 footnote2
-"It can be seen that about 20% of both male and female clients default, though the percentage is slightly higher in males."
+"It can be seen that about 20% of male and 24% of female clients default.Its not clear if this is significant to conclude default status based on gender."
 ;
 * 
 Methodology: Use PROC FREQ to compute the percentage of clients defaulting based
@@ -59,7 +59,7 @@ proc freq data=UCI_Credit_Card_analytic_file;
     table 
          default_payment_next_month 
         *sex
-	    / missing norow nocol nofreq
+	    / missing norow nopercent nofreq
     ;
     format
         default_payment_next_month default_payment_next_month_bins.
@@ -91,7 +91,7 @@ proc freq data=UCI_Credit_Card_analytic_file;
     table
          default_payment_next_month
         *Marriage
-	    / missing norow nocol nopercent ;
+	    / missing norow nofreq nopercent ;
 	    where marriage > 0
     ;
 	format
