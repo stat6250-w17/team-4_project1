@@ -29,8 +29,10 @@ Brings in the data preparation file;
 *Research Questions;
 
 /*Research Question 1*/
-title1 'Research Question: What is the average bill amount for the most recent 
-month for customers who have defaulted on payment, for each education level?';
+* IL: consider not wrapping literal strings, as in the following example:;
+title1
+'Research Question: What is the average bill amount for the most recent month for customers who have defaulted on payment, for each education level?'
+;
 title2 'Rationale: This gives an idea about the most recent bill amounts for
 defaulters and see if education may play any role.';
 footnote1 'By finding the average of the most recent bill statement across 
