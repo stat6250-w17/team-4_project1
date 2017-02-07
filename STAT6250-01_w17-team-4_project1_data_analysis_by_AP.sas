@@ -1,3 +1,4 @@
+
 *******************************************************************************;
 **************** 80-character banner for column width reference ***************;
 * (set window width to banner width to calibrate line length to 80 characters *;
@@ -25,16 +26,16 @@ directory, if using Windows;
 
 %macro setup;
 %if
-	&SYSSCP. = WIN
+    &SYSSCP. = WIN
 %then
-	%do;
-		X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";			
-		%include ".\&dataPrepFileName.";
-	%end;
+    %do;
+        X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";           
+        %include ".\&dataPrepFileName.";
+    %end;
 %else
-	%do;
-		%include "~/&sasUEFilePrefix./&dataPrepFileName.";
-	%end;
+    %do;
+        %include "~/&sasUEFilePrefix./&dataPrepFileName.";
+    %end;
 %mend;
 %setup
 
@@ -48,8 +49,9 @@ title2
 footnote1
 "Based on the above output, it cannot be concluded if gender plays a role or not."
 ;
+*IL: typo;
 footnote2
-"It can be seen that about 20% of male and 24% of female clients default.Its not clear if this is significant to conclude default status based on gender."
+"It can be seen that about 20% of male and 24% of female clients default. Its not clear if this is significant to conclude default status based on gender."
 ;
 * 
 Methodology: Use PROC FREQ to compute the percentage of clients defaulting based
@@ -59,7 +61,7 @@ proc freq data=UCI_Credit_Card_analytic_file;
     table 
          default_payment_next_month 
         *sex
-	    / missing norow nopercent nofreq
+        / missing norow nopercent nofreq
     ;
     format
         default_payment_next_month default_payment_next_month_bins.
@@ -91,13 +93,13 @@ proc freq data=UCI_Credit_Card_analytic_file;
     table
          default_payment_next_month
         *Marriage
-	    / missing norow nofreq nopercent ;
-	    where marriage > 0
+        / missing norow nofreq nopercent ;
+        where marriage > 0
     ;
-	format
+    format
         default_payment_next_month default_payment_next_month_bins.
-		marriage marital_status_bins.
-	;
+        marriage marital_status_bins.
+    ;
 run;
 title;
 footnote;
@@ -125,9 +127,10 @@ footnote2
 Methodology: We have to use regression to find which parameter affects the 
 default payment.
 ;
+* IL: consider using proc logistic instead;
 proc reg data=UCI_Credit_Card_analytic_file;
     model default_payment_next_month = SEX MARRIAGE EDUCATION
-    ;	
+    ;   
 run;
 quit;
 title;
