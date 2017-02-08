@@ -2,13 +2,14 @@
 **************** 80-character banner for column width reference ***************;
 * (set window width to banner width to calibrate line length to 80 characters *;
 *******************************************************************************;
-
+* IL: consider adding linebreaks in the comment block to make it easier to read;
 *
 This file uses the following analytic dataset to address several research
 questions regarding default of credit card clients
 Dataset Name: UCI_Credit_Card_analytic_file created in external file
 STAT6250-01_w17-team-4_project1_data_preparation.sas, which is assumed to be
 in the same directory as this file
+
 See included file for dataset properties
 ;
 
@@ -24,16 +25,16 @@ directory, if using Windows.
 
 %macro setup;
 %if
-	&SYSSCP. = WIN
+    &SYSSCP. = WIN
 %then
-	%do;
-		X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";			
-		%include ".\&dataPrepFileName.";
-	%end;
+    %do;
+        X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";           
+        %include ".\&dataPrepFileName.";
+    %end;
 %else
-	%do;
-		%include "~/&sasUEFilePrefix./&dataPrepFileName.";
-	%end;
+    %do;
+        %include "~/&sasUEFilePrefix./&dataPrepFileName.";
+    %end;
 %mend;
 %setup
 
@@ -63,13 +64,16 @@ title;
 footnote;
 
 
-
+*IL: be careful with unnecessary trailing spaces in titles;
+*IL: watch for typos;
 title1
-"Research Question: Which age group  people are more likely to default?  "
+"Research Question: Which age group of people is more likely to default?  "
 ;
 title2
 "Rationale: This would help to know that if age is related to default and that what age range of clients are more likely to default ."
 ;
+* IL: consider writing everything you can think of, and then taking away
+      anything that doesn't seem necessary;
 footnote1
 "Based on the above output, clients who are younger than 25 and older than 55 are most likely to default (having default rate of 26.6%). "
 ;
@@ -113,6 +117,7 @@ footnote3
 Methodolody: Compute five-number summaries by default.payment.next.month 
 indicator variable
 ;
+* consider using regression for an inferential followup to this analysis;
 proc means 
         min q1 median q3 max 
         data=UCI_Credit_Card_analytic_file
