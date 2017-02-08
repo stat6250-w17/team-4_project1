@@ -75,16 +75,16 @@ title2
 * IL: consider writing everything you can think of, and then taking away
       anything that doesn't seem necessary;
 footnote1
-"Based on the above output, clients who are younger than 25 and older than 55 are most likely to default (having default rate of 26.6%)."
+"Based on the above output, clients who are younger than 25 and older than 55 are most likely to default (26.6% clients default)."
 ;
 footnote2
-"Clients who are 25-35 years old are least likely to default (having default rate of 19.83%)."
+"Clients who are 25-35 years old are least likely to default (19.83% clients default)."
 ;
 footnote3
 "The output makes sense. Clients younger than 25 are mainly college students, and clients older than 55 are mainly retirees. They have low incomes but relatively high expenses."
 ;
 footnote4
-"Clients who are 25-35 years old are careful with  their credit because they need good credit to loan for houses and cars."
+"Clients who are 25-35 are careful with  their credit because they need good credit to loan for houses and cars."
 ;
 footnote5
 "Further analysis to use logistic regression to look for how age exactly affects clients default."
@@ -116,7 +116,7 @@ footnote1
 "Based on the above output, the distribution of credit limit for default clients is pretty much different form that for standard clients."
 ;
 footnote2
-"Credit limit for default clients(with median 75000) is much lower than that for standard clients(with median 100000)."
+"Credit limit for default clients(with median 100000) is much lower than that for standard clients(with median 150000)."
 ;
 footnote3
 "Further analysis to use logistic regression to look for how credit limit exactly affects clients default."
