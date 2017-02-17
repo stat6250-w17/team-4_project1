@@ -46,10 +46,10 @@ title2
 "Rationale: This would help to know how serious the credit card default is for the credit card company."
 ;
 footnote1
-"Based on the above output, 22.12% clients are defaulting, which is very high, the company is on fire."
+"Based on the above output, 22.12% clients are defaulting, which is very high, the company is at high risk for losing revenue due to clients defaulting."
 ;
 footnote2
-"Further analysis to look for who are defaulting so that the company is able to take action to reduce default loss."
+"Further analysis to look for who are defaulting so that the company is able to take action to reduce loss due to clients defaulting."
 ;
 *
 Methodology: Use PROC freq to compute the percentage of default clients.
@@ -77,7 +77,7 @@ footnote2
 "The output makes sense. Clients younger than 25 are mainly college students, and clients older than 55 are mainly retirees. They have low incomes but relatively high expenses. Clients who are 25-35 are careful with their credit because they need good credit to loan for houses and cars."
 ;
 footnote3
-"Further analysis to build models with multiple factors including age to predict who are going to default in next month is needed, so that the company has a full clear picture of who are defaulting and is able to take action to reduce defualt loss."
+"Further analysis to build models with multiple factors including age to predict who are going to default in next month is needed, so that the company has a full clear picture of who are defaulting and is able to take action to reduce loss due to clients defaulting."
 ;
 *
 Methodology: use proc format to group age, then use proc freq to compute
@@ -112,7 +112,7 @@ footnote3
 "This output is not surprising. Credit limit is determined basically based on a client's credit history and income, so lower credit limit implies worse credit and lower income, then these clients are more likely to default." 
 ;
 footnote4
-"Further analysis to build models with multiple factors including credit limit to predict who are going to default in next month is needed, so that the company has a full clear picture of who are defaulting and is able to take action to reduce default loss."
+"Further analysis to build models with multiple factors including credit limit to predict who are going to default in next month is needed, so that the company has a full clear picture of who are defaulting and is able to take action to reduce loss due to clients defaulting."
 ;
 *
 Methodolody: Compute five-number summaries by default_payment_next_month
